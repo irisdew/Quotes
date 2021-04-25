@@ -17,7 +17,7 @@ const Home = ({ userObj }) => {
     await dbService.collection("tweets").add({
       text: tweet,
       createdAt: Date.now(),
-      creatorId: userObj.uid,
+      authorId: userObj.uid,
     });
     setTweet("");
   };
@@ -36,7 +36,7 @@ const Home = ({ userObj }) => {
       </form>
       <div>
         {tweets.map((tweet) => (
-          <Tweet key={tweet.id} tweetObj={tweet} />
+          <Tweet key={tweet.id} tweetObj={tweet} isAuthor={tweet.authorId === userObj.uid} />
         ))}
       </div>
     </div>
