@@ -6,6 +6,7 @@ const Home = ({ userObj }) => {
   const [tweet, setTweet] = useState("");
   const [tweets, setTweets] = useState([]);
   useEffect(() => {
+    // snapshot gives you update when changes happened in realtime
     dbService.collection("tweets").onSnapshot((snapshot) => {
       const tweetArray = snapshot.docs.map((doc) => ({
         id: doc.id,
