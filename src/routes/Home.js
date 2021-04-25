@@ -4,18 +4,8 @@ import React, { useState, useEffect } from "react";
 const Home = ({ userObj }) => {
   const [tweet, setTweet] = useState("");
   const [tweets, setTweets] = useState([]);
-  const getTweets = async () => {
-    const dbTweets = await dbService.collection("tweets").get();
-    dbTweets.forEach((document) => {
-      const tweetObject = {
-        ...document.data(),
-        id: document.id,
-      };
-      setTweets((prev) => [tweetObject, ...prev]);
-    });
-  };
   useEffect(() => {
-    getTweets();
+    dbService.collection("tweets").onSnapshot((snapshot) => console.log("something happened"));
   }, []);
   const onSubmit = async (event) => {
     event.preventDefault();
@@ -43,7 +33,6 @@ const Home = ({ userObj }) => {
         {tweets.map((tweet) => (
           <div key={tweet.id}>
             <h4>{tweet.text}</h4>
-            <p>{tweet.creatorId}</p>
           </div>
         ))}
       </div>
