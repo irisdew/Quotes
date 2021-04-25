@@ -5,7 +5,11 @@ const Home = ({ userObj }) => {
   const [tweet, setTweet] = useState("");
   const [tweets, setTweets] = useState([]);
   useEffect(() => {
-    dbService.collection("tweets").onSnapshot((snapshot) => console.log("something happened"));
+    dbService.collection("tweets").onSnapshot((snapshot) => {
+      const tweetArray = snapshot.docs.map((doc) => ({ id: doc.id, ...doc.data() }));
+      console.log(tweetArray);
+      setTweets(tweetArray);
+    });
   }, []);
   const onSubmit = async (event) => {
     event.preventDefault();
