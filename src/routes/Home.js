@@ -7,7 +7,10 @@ const Home = ({ userObj }) => {
   const [tweets, setTweets] = useState([]);
   useEffect(() => {
     dbService.collection("tweets").onSnapshot((snapshot) => {
-      const tweetArray = snapshot.docs.map((doc) => ({ id: doc.id, ...doc.data() }));
+      const tweetArray = snapshot.docs.map((doc) => ({
+        id: doc.id,
+        ...doc.data(),
+      }));
       console.log(tweetArray);
       setTweets(tweetArray);
     });
@@ -30,9 +33,9 @@ const Home = ({ userObj }) => {
   return (
     <div>
       <span>Home</span>
-      <form>
+      <form onSubmit={onSubmit}>
         <input value={tweet} onChange={onChange} type="text" placeholder="Whant's on your mind?" maxLength={120} />
-        <input type="submit" value="Tweet" onClick={onSubmit} />
+        <input type="submit" value="Tweet" />
       </form>
       <div>
         {tweets.map((tweet) => (
