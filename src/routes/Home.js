@@ -1,7 +1,7 @@
 import { dbService } from "fbase";
 import React, { useState, useEffect } from "react";
 
-const Home = () => {
+const Home = ({ userObj }) => {
   const [tweet, setTweet] = useState("");
   const [tweets, setTweets] = useState([]);
   const getTweets = async () => {
@@ -20,8 +20,9 @@ const Home = () => {
   const onSubmit = async (event) => {
     event.preventDefault();
     await dbService.collection("tweets").add({
-      tweet,
+      text: tweet,
       createdAt: Date.now(),
+      creatorId: userObj.uid,
     });
     setTweet("");
   };
@@ -31,7 +32,6 @@ const Home = () => {
     } = event;
     setTweet(value);
   };
-  console.log(tweets);
   return (
     <div>
       <span>Home</span>
@@ -42,7 +42,8 @@ const Home = () => {
       <div>
         {tweets.map((tweet) => (
           <div key={tweet.id}>
-            <h4>{tweet.tweet}</h4>
+            <h4>{tweet.text}</h4>
+            <p>{tweet.creatorId}</p>
           </div>
         ))}
       </div>
