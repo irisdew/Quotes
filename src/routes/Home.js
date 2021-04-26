@@ -1,11 +1,12 @@
 import Tweet from "components/Tweet";
-import { dbService } from "fbase";
+import { dbService, storageService } from "fbase";
 import React, { useState, useEffect } from "react";
 
 const Home = ({ userObj }) => {
   const [tweet, setTweet] = useState("");
   const [tweets, setTweets] = useState([]);
   const [attachment, setAttachment] = useState("");
+  const [attachmentName, setAttachmentName] = useState("");
   useEffect(() => {
     // snapshot gives you update when changes happened in realtime
     dbService.collection("tweets").onSnapshot((snapshot) => {
@@ -19,12 +20,21 @@ const Home = ({ userObj }) => {
   }, []);
   const onSubmit = async (event) => {
     event.preventDefault();
-    await dbService.collection("tweets").add({
+    let attachmentUrl = "";
+    if (attachment != "") {
+      const attachmentRef = storageService.ref().child(`${userObj.uid}/${attachmentName}`);
+      const response = await attachmentRef.putString(attachment, "data_url");
+      attachmentUrl = await response.ref.getDownloadURL();
+    }
+    const newTweet = {
       text: tweet,
       createdAt: Date.now(),
       authorId: userObj.uid,
-    });
+      attachmentUrl,
+    };
+    await dbService.collection("tweets").add(newTweet);
     setTweet("");
+    setAttachment("");
   };
   const onChange = (event) => {
     const {
@@ -37,6 +47,7 @@ const Home = ({ userObj }) => {
       target: { files },
     } = event;
     const theFile = files[0];
+    setAttachmentName(theFile.name);
     const reader = new FileReader();
     reader.onloadend = (finishedEvent) => {
       const {

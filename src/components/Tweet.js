@@ -36,7 +36,7 @@ const Tweet = ({ tweetObj, isAuthor }) => {
       ) : (
         <div>
           <h4>{tweetObj.text}</h4>
-
+          {tweetObj.attachmentUrl && <img alt="attachment" src={tweetObj.attachmentUrl} width="50px" height="50px" />}
           {isAuthor && (
             <>
               <button onClick={onDeleteClick}>Delete</button>
