@@ -11,6 +11,7 @@ const Profie = ({ userObj, refreshUser }) => {
   };
   useEffect(() => {
     getMyTweets();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
   const [userName, setUserName] = useState(userObj.displayName);
   const onChange = (event) => {
@@ -28,10 +29,20 @@ const Profie = ({ userObj, refreshUser }) => {
   return (
     <div>
       <button onClick={onLogOutClick}>Logout</button>
-      <span>Profile</span>
+      <br></br>
+      <h2>Profile</h2>
+      <span>User Name : {userName}</span>
+      <br />
+      <span>Quoting since 2021</span>
+      <br />
+      <button>Edit</button>
       <form onSubmit={onSubmit}>
-        <input type="text" value={userName} onChange={onChange} />
-        <input type="submit" value="Update" />
+        <h2>Edit Profile</h2>
+        User Name : <input type="text" value={userName} onChange={onChange} />
+        <br />
+        User Image : <input type="file" accept="image/*" />
+        <br />
+        <input type="submit" value="Update Profile" />
       </form>
     </div>
   );
