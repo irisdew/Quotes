@@ -11,20 +11,14 @@ const GlobalStyle = createGlobalStyle`
     }
 
     body {
-    overflow: hidden;
+    /* overflow: hidden; */
     background: linear-gradient(to bottom, #f1f4f9, #dff1ff);
-    }
-
-    /* section {
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        min-height: 100vh;
-        background: linear-gradient(to bottom, #f1f4f9, #dff1ff);
-    } */
-
-    section.color {
-        
+    width: 100vw;
+    height: 100vh;
+    display: flex;
+    /* flex-direction: column; */
+    align-items: center;
+    justify-content: center;
     }
 
 `;

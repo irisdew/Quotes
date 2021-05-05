@@ -19,8 +19,8 @@ const Home = ({ userObj }) => {
   }, []);
 
   return (
-    <div>
-      <span>Home</span>
+    <div style={{ margin: "auto", textAlign: "center", display: "flex", flexDirection: "column", alignItems: "center" }}>
+      {/* <h2>Home</h2> */}
       <TweetFactory userObj={userObj} />
       <div>
         {tweets.map((tweet) => (

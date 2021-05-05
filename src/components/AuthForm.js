@@ -51,10 +51,10 @@ export default AuthForm;
 
 const Container = styled.form`
   position: relative;
-  width: 400px;
+  /* width: 400px;
   max-width: 400px;
   background: rgba(255, 255, 255, 0.1);
-  border-radius: 10px;
+  border-radius: 10px; */
   display: flex;
   justify-content: center;
   align-items: center;

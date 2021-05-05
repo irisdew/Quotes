@@ -17,12 +17,12 @@ const Auth = () => {
 export default Auth;
 
 const Container = styled.section`
-  width: 400px;
+  /* width: 400px;
   min-width: 400px;
   display: flex;
   justify-content: center;
   align-items: center;
   flex-direction: column;
   margin: auto;
-  padding: 30px;
+  padding: 30px; */
 `;
